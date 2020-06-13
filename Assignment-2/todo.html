@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>To do List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h1>To do List</h1>
+            <input type="text" class="txt" placeholder="Add a task">
+            <div class="list">
+                <h3>List</h3>
+            </div>
+            <div class="completed">
+                <h3>Completed</h3>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(".txt").on("keyup", function (event) {
+                if (event.keyCode == 13 && $(".txt").val() != "") {
+                    let task = $("<div class='task'></div>").text($(".txt").val());
+                    let del = $("<i class='fas fa-trash-alt'></i>").click(function () {
+                        let p = $(this).parent();
+                        p.fadeOut(function () {
+                            p.remove();
+                        });
+                    });
+
+                    let check = $("<i class='fas fa-check'></i>").click(function () {
+                        let p = $(this).parent();
+                        p.fadeOut(function () {
+                            $(".completed").append(p);
+                            p.fadeIn();
+                        });
+                        $(this).remove();
+                    });
+
+                    task.append(del, check);
+                    $(".list").append(task);
+                    $(".txt").val("");
+                }
+            });
+        </script>
+    
+    </body>
+
+</html>
